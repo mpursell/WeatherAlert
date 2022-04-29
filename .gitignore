@@ -1,0 +1,9 @@
+#secrets
+.env
+
+#venv files
+__pycache__/
+bin/
+lib/
+pyenv.cfg
+pyvenv.cfg

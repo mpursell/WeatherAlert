@@ -1,4 +1,3 @@
-from itsdangerous import json
 import requests
 import os
 from dotenv import load_dotenv, find_dotenv
@@ -37,7 +36,7 @@ class ApiHandler:
 
 
 
-def GetTomorrowFormattedDateAsString():
+def GetTomorrowFormattedDateAsString() -> str:
 
     today = date.today()
     tomorrow = today + timedelta(days=1)
@@ -52,15 +51,10 @@ def GetWeather():
     weatherJson = weatherCheck.response().json()
 
     return weatherJson
-    
-def GetWindGusts():
 
-    # load_dotenv(find_dotenv())
-    # apiKey = os.environ.get("API_KEY")
 
-    # nottinghamWeather = requests.get(
-    #     f"http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/310015?res=3hourly&key={apiKey}"
-    # )
+def GetWindGusts() -> int:
+
     nottinghamWeatherJson = GetWeather()
 
     periodList = nottinghamWeatherJson["SiteRep"]["DV"]["Location"]["Period"]
@@ -88,9 +82,9 @@ def checkWeather():
     if GetWindGusts() >= 30:
         textMessage = TwilioTextMessage('Wind Over 30mph tomorrow.  Take down the Bball hoop!')
         textMessage.send_message()
-    else:
-        textMessage = TwilioTextMessage('No wind gusts')
-        textMessage.send_message()
+    # else:
+    #     textMessage = TwilioTextMessage('No wind gusts')
+    #     textMessage.send_message()
 
 
 checkWeather()

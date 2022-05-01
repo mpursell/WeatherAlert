@@ -4,6 +4,21 @@
 
 App to message me if the wind gust speed for tomorrow exceeds 30mph, so I can take down the basketball hoop!
 
+## Pre-requisites
+
+You'll need:
+
+* An API account with the Met Office - https://www.metoffice.gov.uk/services/data/datapoint/api
+* A Twilio API account - https://console.twilio.com/
+* A .env file creating with the following:
+    * API_KEY (this is your Met Office API key)
+    * TWILIO_ACCOUNT_SID
+    * TWILIO_AUTH_TOKEN
+    * TWILIO_PHONE_NUMBER
+    * MY_PHONE_NUMBER (your personal phone number)
+    
+All the TWILIO requirements can be found in the Twilio console once you're signed in
+
 ## Virtual Environment
 
 Developed and tested in venv.  

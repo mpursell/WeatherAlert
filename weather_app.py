@@ -4,36 +4,33 @@ from dotenv import load_dotenv, find_dotenv
 from datetime import date, timedelta
 from twilio.rest import Client
 
+
 class TwilioTextMessage:
-    
     def __init__(self, messageText):
         load_dotenv(find_dotenv())
-        self.accountSID = os.environ.get('TWILIO_ACCOUNT_SID')
-        self.authToken = os.environ.get('TWILIO_AUTH_TOKEN')
-        self.twilioPhoneNumber = os.environ.get('TWILIO_PHONE_NUMBER')
-        self.myPhoneNumber = os.environ.get('MY_PHONE_NUMBER')
+        self.accountSID = os.environ.get("TWILIO_ACCOUNT_SID")
+        self.authToken = os.environ.get("TWILIO_AUTH_TOKEN")
+        self.twilioPhoneNumber = os.environ.get("TWILIO_PHONE_NUMBER")
+        self.myPhoneNumber = os.environ.get("MY_PHONE_NUMBER")
         self.messageText = messageText
 
     def send_message(self):
         self.twilioClient = Client(self.accountSID, self.authToken)
 
         self.message = self.twilioClient.messages.create(
-            to=self.myPhoneNumber,
-            from_=self.twilioPhoneNumber,
-            body=self.messageText
+            to=self.myPhoneNumber, from_=self.twilioPhoneNumber, body=self.messageText
         )
 
+
 class ApiHandler:
-    
     def __init__(self, url):
         load_dotenv(find_dotenv())
         self.url = url
         self.apiKey = os.environ.get("API_KEY")
-    
-    def response(self):
+
+    def response(self) -> object:
         apiCall = requests.get(f"{self.url}{self.apiKey}")
         return apiCall
-
 
 
 def GetTomorrowFormattedDateAsString() -> str:
@@ -45,9 +42,12 @@ def GetTomorrowFormattedDateAsString() -> str:
     formattedDate = f"{tomorrow}Z"
     return str(formattedDate)
 
-def GetWeather():
 
-    weatherCheck = ApiHandler("http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/310015?res=3hourly&key=")
+def GetWeather() -> object:
+
+    weatherCheck = ApiHandler(
+        "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/310015?res=3hourly&key="
+    )
     weatherJson = weatherCheck.response().json()
 
     return weatherJson
@@ -80,7 +80,9 @@ def GetWindGusts() -> int:
 def checkWeather():
 
     if GetWindGusts() >= 30:
-        textMessage = TwilioTextMessage('Wind Over 30mph tomorrow.  Take down the Bball hoop!')
+        textMessage = TwilioTextMessage(
+            "Wind Over 30mph tomorrow.  Take down the Bball hoop!"
+        )
         textMessage.send_message()
     # else:
     #     textMessage = TwilioTextMessage('No wind gusts')
@@ -88,5 +90,3 @@ def checkWeather():
 
 
 checkWeather()
-
-

@@ -47,3 +47,24 @@ From inside the virtual environment, run
 python3 -m pytest -v tests
 ```
 from the application root folder.
+
+## Docker
+Dockerfile and docker-compose.yml have been setup to allow a running app container (weather-app-local) and a test container (weather-app-test).
+
+### Docker Compose
+
+To build and run the containers using docker-compose from the root project folder:
+```bash
+$ docker-compose up local
+```
+or 
+```bash
+$ docker-compose up test
+```
+
+### Docker run
+
+To build and run the images and containers using docker run, from the root project folder:
+```bash
+$ docker run $(docker build . -q)
+```

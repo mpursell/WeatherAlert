@@ -1,6 +1,4 @@
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-
-
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)     
 ![python: 3.9.7](https://img.shields.io/badge/python-3.9.7-blue.svg)
 
 # Weather Alert App 

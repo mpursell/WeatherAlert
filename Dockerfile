@@ -10,9 +10,14 @@ RUN apt update -y &&\
 COPY . /usr/src/weather_alert
 
 RUN pip install -r /usr/src/weather_alert/requirements.txt &&\
-    chmod +x ./docker-entrypoint.sh 
+    chmod +x ./docker-entrypoint.sh &&\
+    chmod +x ./docker-entrypoint-test.sh 
 
 FROM base as local
 
 # run app via a shell script 
 CMD ["./docker-entrypoint.sh"]
+
+FROM base as test
+
+CMD ["./docker-entrypoint-test.sh"]

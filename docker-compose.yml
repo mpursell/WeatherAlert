@@ -9,3 +9,12 @@ services:
     container_name: weather-app-local
     env_file:
       - .env
+
+  test: 
+    build:
+      context: "."
+      target: test
+    image: weather-app:test
+    container_name: weather-app-test
+    env_file:
+      - .env

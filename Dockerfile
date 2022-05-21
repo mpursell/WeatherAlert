@@ -12,7 +12,7 @@ COPY . /usr/src/weather_alert
 RUN pip install -r /usr/src/weather_alert/requirements.txt &&\
     chmod +x ./docker-entrypoint.sh 
 
-FROM base as production
+FROM base as local
 
 # run app via a shell script 
 CMD ["./docker-entrypoint.sh"]

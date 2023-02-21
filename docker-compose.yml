@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+
+  local:
+    build:
+      context: "."
+      target: local
+    image: weather-alert:local
+    container_name: weather-alert-local
+    env_file:
+      - .env
+
+  test:
+    build:
+      context: "."
+      target: test
+    image: weather-alert:test
+    container_name: weather-alert-test
+    env_file:
+      - .env
